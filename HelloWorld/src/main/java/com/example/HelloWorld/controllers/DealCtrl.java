@@ -53,10 +53,16 @@ public class DealCtrl {
 		Timestamp maxTime=rs.getTimestamp("maxtime");
 			if(ItemsBought>=maxitem){
 				dr.deleteById(dealId);
+				PreparedStatement ps1=con.prepareStatement("Delete from CustForDeal where dealId=?1");
+				ps1.setInt(1, dealId);
+				ps1.executeUpdate();
 				return "Deal with id="+dealId+ " deleted as items are sold out";
 			}
 			if(curT.after(maxTime)){
 				dr.deleteById(dealId);
+				PreparedStatement ps1=con.prepareStatement("Delete from CustForDeal where dealId=?1");
+				ps1.setInt(1, dealId);
+				ps1.executeUpdate();
 				return "Deal with id="+dealId+ " deleted as time is over";
 			}
 		
