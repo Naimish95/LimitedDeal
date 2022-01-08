@@ -21,12 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.HelloWorld.dao.CustRepo;
 import com.example.HelloWorld.dao.DealRepo;
-
-import model.CustForDeal;
-import model.Deal;
+import com.example.HelloWorld.model.CustForDeal;
+import com.example.HelloWorld.model.Deal;
 
 @RestController
-@ComponentScan("com.example.HelloWorld.*")
+@ComponentScan("com.example.HelloWorld.controller")
 public class DealCtrl {
 
 	@Autowired
