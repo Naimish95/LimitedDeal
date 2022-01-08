@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.HelloWorld.model.Deal;
 
-@Component
 public interface DealRepo extends JpaRepository<Deal, Integer>{
 
 }
