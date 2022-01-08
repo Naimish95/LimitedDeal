@@ -1,15 +1,7 @@
 package com.example.HelloWorld.controllers;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +33,7 @@ public class DealCtrl {
 		return "Deal with id="+d.getDealId()+" created successfully";
 	}
 	@DeleteMapping("/endDeal/{did}")
-	public String endDeal(@PathVariable("did")int dealId) throws SQLException{
+	public String endDeal(@PathVariable("did")int dealId){
 		
 		Deal d=dealRepo.findById(dealId).get();
 		if(d.getItemsBought()>=d.getMaxItems()){
@@ -61,14 +53,14 @@ public class DealCtrl {
 	public String updateDeal(@PathVariable("did")int dealId,Deal d){
 		LocalDateTime maxTime=d.getMaxtime();
 		int maxItems=d.getMaxItems();
-		Deal dprev=dr.getById(dealId);
+		Deal dprev=dealRepo.getById(dealId);
 		dprev.setMaxItems(maxItems);
 		dprev.setMaxtime(maxTime);
 		dealRepo.save(dprev);
 		return "Deal has been updated";
 	}
 	@PostMapping("/claimDeal/{did}")
-	public String claimDeal(@PathVariable("did")int dealId,CustForDeal c) throws SQLException{
+	public String claimDeal(@PathVariable("did")int dealId,CustForDeal c){
 		//check if person has bought deal before
 		Optional<CustForDeal> cust=custRepo.findCustByDealId(dealId, c.getCustId());
 		
