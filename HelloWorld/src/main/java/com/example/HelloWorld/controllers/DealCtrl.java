@@ -65,11 +65,9 @@ public class DealCtrl {
 		Optional<CustForDeal> cust=custRepo.findCustByDealId(dealId, c.getCustId());
 		
 		if(!cust.isPresent()){
-			//chcek if items bought<maxItems
+			
 			Deal d=dealRepo.findById(dealId).get();
-//			System.out.println(d.getMaxtime());
-//			System.out.println(LocalDateTime.now());
-//			System.out.println(LocalDateTime.now().isAfter(d.getMaxtime()));
+			//chcek if items bought<maxItems and current time<maxTime of deal
 			if(d.getItemsBought()<d.getMaxItems() && LocalDateTime.now().isBefore(d.getMaxtime())){
 			d.setItemsBought(d.getItemsBought()+1);
 			dealRepo.save(d);
