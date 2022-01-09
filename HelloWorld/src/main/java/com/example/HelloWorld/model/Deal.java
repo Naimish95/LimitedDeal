@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Deal {
 	@Id
@@ -13,6 +15,7 @@ public class Deal {
 	int maxItems;
 	int price;
 	int ItemsBought;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	LocalDateTime maxtime;
 	
 	

@@ -10,9 +10,9 @@ import com.example.HelloWorld.model.CustForDeal;
 
 public interface CustRepo extends JpaRepository<CustForDeal,Integer>{
 
-	@Query("delete from cust_for_deal where deal_id=?1")
+	@Query("delete from CustForDeal where dealId=?1")
 	public void deleteByDealId(int dealId);
 	
-	@Query("from cust_for_deal where deal_id=?1 and cust_id=?2")
+	@Query("from CustForDeal where dealId=?1 and custId=?2")
 	public Optional<CustForDeal> findCustByDealId(int dealId,int custId);
 }

@@ -18,7 +18,7 @@ import com.example.HelloWorld.model.CustForDeal;
 import com.example.HelloWorld.model.Deal;
 
 @RestController
-@ComponentScan("com.example.HelloWorld.controller")
+//@ComponentScan("com.example.HelloWorld.controller")
 public class DealCtrl {
 
 	@Autowired
@@ -67,10 +67,15 @@ public class DealCtrl {
 		if(!cust.isPresent()){
 			//chcek if items bought<maxItems
 			Deal d=dealRepo.findById(dealId).get();
-			if(d.getItemsBought()<d.getMaxItems() && LocalDateTime.now().isAfter(d.getMaxtime())){
+//			System.out.println(d.getMaxtime());
+//			System.out.println(LocalDateTime.now());
+//			System.out.println(LocalDateTime.now().isAfter(d.getMaxtime()));
+			if(d.getItemsBought()<d.getMaxItems() && LocalDateTime.now().isBefore(d.getMaxtime())){
 			d.setItemsBought(d.getItemsBought()+1);
 			dealRepo.save(d);
+			c.setDealId(dealId);
 			custRepo.save(c);
+			return "Deal made";
 			}
 			else return "Deal cant be made as time is over or maxlimit has reached";
 		}
@@ -78,7 +83,7 @@ public class DealCtrl {
 			return "You have already bought this item";
 		
 		}
-		return null;
+		
 		
 	}
 	
